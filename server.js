@@ -13,21 +13,9 @@ const notificationRoutes = require('./routes/notificationRoutes'); // Notificati
 const app = express();
 const PORT = process.env.PORT || 5001; // Use environment variable for the port
 
-// CORS Configuration
-const allowedOrigins = [
-  'http://localhost:5173',  // Add the actual frontend origin here
-  'https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3--5173--1b4252dd.local-credentialless.webcontainer-api.io', // Add the remote origin here
-];
-
+// CORS Configuration - Allows requests from any origin
 app.use(cors({
-  origin: function(origin, callback) {
-    // Check if the incoming request's origin is allowed
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*',  // Allow all origins
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
